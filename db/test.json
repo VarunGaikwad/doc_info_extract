@@ -1,0 +1,489 @@
+{
+    "status": "DONE",
+    "id": "c90aea53-2842-42c0-b032-8520bec1ea55",
+    "fileName": "Free-Sales-Invoice-Example.jpg",
+    "documentType": "invoice",
+    "created": "2024-06-13T10:45:39.755206+00:00",
+    "finished": "2024-06-13T10:45:48.016605+00:00",
+    "clientId": "default",
+    "languageCodes": [
+        "en"
+    ],
+    "pageCount": 1,
+    "schemaId": "cf8cc8a9-1eee-42d9-9a3e-507a61baac23",
+    "schemaVersion": "1",
+    "width": 1700,
+    "height": 2200,
+    "country": "IT",
+    "bocrVersion": "2.32.0",
+    "doxVersion": "1.91.4",
+    "fileType": "jpeg",
+    "dataForRetrainingStatus": "notUsedForTraining",
+    "extraction": {
+        "headerFields": [
+            {
+                "name": "documentNumber",
+                "category": "document",
+                "value": "100",
+                "rawValue": "100",
+                "type": "string",
+                "page": 1,
+                "confidence": 0.9057996869087219,
+                "coordinates": {
+                    "x": 0.7382352941176471,
+                    "y": 0.1509090909090909,
+                    "w": 0.02117647058823524,
+                    "h": 0.010909090909090896
+                },
+                "model": "ai",
+                "label": "documentNumber",
+                "description": "documentNumber"
+            },
+            {
+                "name": "taxName",
+                "category": "amounts",
+                "value": "SALES TAX",
+                "rawValue": "SALES TAX",
+                "type": "string",
+                "page": 1,
+                "confidence": 0.8565731644630432,
+                "coordinates": {
+                    "x": 0.6447058823529411,
+                    "y": 0.6590909090909091,
+                    "w": 0.07647058823529418,
+                    "h": 0.010000000000000009
+                },
+                "model": "ai",
+                "group": 1,
+                "label": "taxName",
+                "description": "taxName"
+            },
+            {
+                "name": "grossAmount",
+                "category": "amounts",
+                "value": 1408.09,
+                "rawValue": "1,408.09",
+                "type": "number",
+                "page": 1,
+                "confidence": 0.9086959958076477,
+                "coordinates": {
+                    "x": 0.8505882352941176,
+                    "y": 0.7086363636363636,
+                    "w": 0.055882352941176494,
+                    "h": 0.012727272727272698
+                },
+                "model": "ai",
+                "label": "grossAmount",
+                "description": "grossAmount"
+            },
+            {
+                "name": "currencyCode",
+                "category": "amounts",
+                "value": "USD",
+                "rawValue": "USD",
+                "type": "string",
+                "page": 1,
+                "confidence": 0.9332287907600403,
+                "coordinates": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "w": 0.0,
+                    "h": 0.0
+                },
+                "model": "ai",
+                "label": "currencyCode",
+                "description": "currencyCode"
+            },
+            {
+                "name": "documentDate",
+                "category": "document",
+                "value": "2018-06-14",
+                "rawValue": "June 14, 2018",
+                "type": "date",
+                "page": 1,
+                "confidence": 0.9121472835540771,
+                "coordinates": {
+                    "x": 0.7370588235294118,
+                    "y": 0.135,
+                    "w": 0.10235294117647054,
+                    "h": 0.012272727272727268
+                },
+                "model": "ai",
+                "label": "documentDate",
+                "description": "documentDate"
+            },
+            {
+                "name": "taxAmount",
+                "category": "amounts",
+                "value": 85.94,
+                "rawValue": "85.94",
+                "type": "number",
+                "page": 1,
+                "confidence": 0.9048815965652466,
+                "coordinates": {
+                    "x": 0.8711764705882353,
+                    "y": 0.6590909090909091,
+                    "w": 0.034117647058823475,
+                    "h": 0.010000000000000009
+                },
+                "model": "ai",
+                "group": 1,
+                "label": "taxAmount",
+                "description": "taxAmount"
+            },
+            {
+                "name": "taxRate",
+                "category": "amounts",
+                "value": 6.5,
+                "rawValue": "6.50%",
+                "type": "number",
+                "page": 1,
+                "confidence": 0.8870205879211426,
+                "coordinates": {
+                    "x": 0.87,
+                    "y": 0.6336363636363637,
+                    "w": 0.03941176470588237,
+                    "h": 0.009545454545454524
+                },
+                "model": "ai",
+                "group": 1,
+                "label": "taxRate",
+                "description": "taxRate"
+            },
+            {
+                "name": "senderAddress",
+                "category": "sender",
+                "value": "City, ST ZIP Code",
+                "rawValue": "City, ST ZIP Code",
+                "type": "string",
+                "page": 1,
+                "confidence": 0.5077208578586578,
+                "coordinates": {
+                    "x": 0.13176470588235295,
+                    "y": 0.16590909090909092,
+                    "w": 0.13058823529411762,
+                    "h": 0.01409090909090907
+                },
+                "model": "ai",
+                "label": "senderAddress",
+                "description": "senderAddress"
+            },
+            {
+                "name": "netAmount",
+                "category": "amounts",
+                "value": 1322.15,
+                "rawValue": "1,322.15",
+                "type": "number",
+                "page": 1,
+                "confidence": 0.9117978811264038,
+                "coordinates": {
+                    "x": 0.8505882352941176,
+                    "y": 0.6063636363636363,
+                    "w": 0.05294117647058827,
+                    "h": 0.013636363636363669
+                },
+                "model": "ai",
+                "label": "netAmount",
+                "description": "netAmount"
+            }
+        ],
+        "lineItems": [
+            [
+                {
+                    "name": "description",
+                    "category": "details",
+                    "value": "Item 1 description",
+                    "rawValue": "Item 1 description",
+                    "type": "string",
+                    "page": 1,
+                    "confidence": 0.881586492061615,
+                    "coordinates": {
+                        "x": 0.13352941176470587,
+                        "y": 0.43,
+                        "w": 0.11058823529411765,
+                        "h": 0.012727272727272754
+                    },
+                    "model": "ai",
+                    "label": "description",
+                    "description": "description"
+                },
+                {
+                    "name": "netAmount",
+                    "category": "amounts",
+                    "value": 1034.77,
+                    "rawValue": "1,034.77",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.9036614298820496,
+                    "coordinates": {
+                        "x": 0.8476470588235294,
+                        "y": 0.42954545454545456,
+                        "w": 0.0523529411764706,
+                        "h": 0.012727272727272698
+                    },
+                    "model": "ai",
+                    "label": "netAmount",
+                    "description": "netAmount"
+                },
+                {
+                    "name": "quantity",
+                    "category": "details",
+                    "value": 23.0,
+                    "rawValue": "23",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.892518937587738,
+                    "coordinates": {
+                        "x": 0.5894117647058823,
+                        "y": 0.42954545454545456,
+                        "w": 0.013529411764705901,
+                        "h": 0.012727272727272698
+                    },
+                    "model": "ai",
+                    "label": "quantity",
+                    "description": "quantity"
+                },
+                {
+                    "name": "unitPrice",
+                    "category": "details",
+                    "value": 44.99,
+                    "rawValue": "44.99",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.9018481373786926,
+                    "coordinates": {
+                        "x": 0.6935294117647058,
+                        "y": 0.42954545454545456,
+                        "w": 0.035882352941176476,
+                        "h": 0.012727272727272698
+                    },
+                    "model": "ai",
+                    "label": "unitPrice",
+                    "description": "unitPrice"
+                }
+            ],
+            [
+                {
+                    "name": "description",
+                    "category": "details",
+                    "value": "Item 1 description",
+                    "rawValue": "Item 1 description",
+                    "type": "string",
+                    "page": 1,
+                    "confidence": 0.8826709389686584,
+                    "coordinates": {
+                        "x": 0.13352941176470587,
+                        "y": 0.455,
+                        "w": 0.11117647058823532,
+                        "h": 0.012727272727272698
+                    },
+                    "model": "ai",
+                    "label": "description",
+                    "description": "description"
+                },
+                {
+                    "name": "netAmount",
+                    "category": "amounts",
+                    "value": 51.96,
+                    "rawValue": "51.96",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.900140106678009,
+                    "coordinates": {
+                        "x": 0.8670588235294118,
+                        "y": 0.455,
+                        "w": 0.03529411764705881,
+                        "h": 0.012272727272727268
+                    },
+                    "model": "ai",
+                    "label": "netAmount",
+                    "description": "netAmount"
+                },
+                {
+                    "name": "quantity",
+                    "category": "details",
+                    "value": 4.0,
+                    "rawValue": "4",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.8942558169364929,
+                    "coordinates": {
+                        "x": 0.5982352941176471,
+                        "y": 0.455,
+                        "w": 0.004705882352941115,
+                        "h": 0.012272727272727268
+                    },
+                    "model": "ai",
+                    "label": "quantity",
+                    "description": "quantity"
+                },
+                {
+                    "name": "unitPrice",
+                    "category": "details",
+                    "value": 12.99,
+                    "rawValue": "12.99",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.9033220410346985,
+                    "coordinates": {
+                        "x": 0.6947058823529412,
+                        "y": 0.455,
+                        "w": 0.03470588235294114,
+                        "h": 0.012272727272727268
+                    },
+                    "model": "ai",
+                    "label": "unitPrice",
+                    "description": "unitPrice"
+                }
+            ],
+            [
+                {
+                    "name": "description",
+                    "category": "details",
+                    "value": "Item 1 description",
+                    "rawValue": "Item 1 description",
+                    "type": "string",
+                    "page": 1,
+                    "confidence": 0.8821543455123901,
+                    "coordinates": {
+                        "x": 0.13352941176470587,
+                        "y": 0.48,
+                        "w": 0.11117647058823532,
+                        "h": 0.013181818181818183
+                    },
+                    "model": "ai",
+                    "label": "description",
+                    "description": "description"
+                },
+                {
+                    "name": "netAmount",
+                    "category": "amounts",
+                    "value": 179.98,
+                    "rawValue": "179.98",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.8999677300453186,
+                    "coordinates": {
+                        "x": 0.86,
+                        "y": 0.48045454545454547,
+                        "w": 0.04235294117647059,
+                        "h": 0.011818181818181783
+                    },
+                    "model": "ai",
+                    "label": "netAmount",
+                    "description": "netAmount"
+                },
+                {
+                    "name": "quantity",
+                    "category": "details",
+                    "value": 2.0,
+                    "rawValue": "2",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.893803596496582,
+                    "coordinates": {
+                        "x": 0.5964705882352941,
+                        "y": 0.48045454545454547,
+                        "w": 0.00588235294117645,
+                        "h": 0.011818181818181783
+                    },
+                    "model": "ai",
+                    "label": "quantity",
+                    "description": "quantity"
+                },
+                {
+                    "name": "unitPrice",
+                    "category": "details",
+                    "value": 89.99,
+                    "rawValue": "89.99",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.9029150605201721,
+                    "coordinates": {
+                        "x": 0.6935294117647058,
+                        "y": 0.48045454545454547,
+                        "w": 0.035882352941176476,
+                        "h": 0.011818181818181783
+                    },
+                    "model": "ai",
+                    "label": "unitPrice",
+                    "description": "unitPrice"
+                }
+            ],
+            [
+                {
+                    "name": "description",
+                    "category": "details",
+                    "value": "Item 1 description",
+                    "rawValue": "Item 1 description",
+                    "type": "string",
+                    "page": 1,
+                    "confidence": 0.8807368675867716,
+                    "coordinates": {
+                        "x": 0.13058823529411764,
+                        "y": 0.5059090909090909,
+                        "w": 0.11352941176470588,
+                        "h": 0.01272727272727281
+                    },
+                    "model": "ai",
+                    "label": "description",
+                    "description": "description"
+                },
+                {
+                    "name": "netAmount",
+                    "category": "amounts",
+                    "value": 55.44,
+                    "rawValue": "55.44",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.8988882899284363,
+                    "coordinates": {
+                        "x": 0.8676470588235294,
+                        "y": 0.5059090909090909,
+                        "w": 0.035882352941176476,
+                        "h": 0.012272727272727324
+                    },
+                    "model": "ai",
+                    "label": "netAmount",
+                    "description": "netAmount"
+                },
+                {
+                    "name": "quantity",
+                    "category": "details",
+                    "value": 56.0,
+                    "rawValue": "56",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.8956716656684875,
+                    "coordinates": {
+                        "x": 0.5911764705882353,
+                        "y": 0.5063636363636363,
+                        "w": 0.0117647058823529,
+                        "h": 0.011818181818181839
+                    },
+                    "model": "ai",
+                    "label": "quantity",
+                    "description": "quantity"
+                },
+                {
+                    "name": "unitPrice",
+                    "category": "details",
+                    "value": 0.99,
+                    "rawValue": "0.99",
+                    "type": "number",
+                    "page": 1,
+                    "confidence": 0.9013580679893494,
+                    "coordinates": {
+                        "x": 0.701764705882353,
+                        "y": 0.5059090909090909,
+                        "w": 0.027647058823529358,
+                        "h": 0.012272727272727324
+                    },
+                    "model": "ai",
+                    "label": "unitPrice",
+                    "description": "unitPrice"
+                }
+            ]
+        ]
+    }
+}
