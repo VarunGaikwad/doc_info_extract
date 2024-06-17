@@ -1,0 +1,31 @@
+<mvc:View
+    xmlns:upload="sap.m.upload"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="docinfoextractui.ext.main.Main"
+>
+    <Page
+        id="Main"
+        title="{i18n>MainTitle}"
+    >
+        <content>
+            <upload:UploadSet
+                id="idUploadSet"
+                instantUpload="false"
+                uploadButtonInvisible="true"
+                uploadCompleted="onUploadComplete"
+            >
+                <upload:toolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            type="Attention"
+                            press="onUploadPress"
+                            text="Upload Files"
+                        />
+                    </OverflowToolbar>
+                </upload:toolbar>
+            </upload:UploadSet>
+        </content>
+    </Page>
+</mvc:View>

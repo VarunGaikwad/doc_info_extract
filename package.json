@@ -1,21 +1,39 @@
 {
-  "name": "doc_info_extract",
-  "version": "1.0.0",
-  "description": "Document Information Extraction.",
-  "repository": "https://github.com/VarunGaikwad/doc_info_extract.git",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@sap/cds": "^7",
-    "axios": "^1.7.2",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "multer": "^1.4.5-lts.1"
-  },
-  "devDependencies": {
-    "@cap-js/sqlite": "^1"
-  },
-  "scripts": {
-    "start": "cds-serve"
-  }
+    "name": "doc_info_extract",
+    "version": "1.0.0",
+    "description": "Document Information Extraction.",
+    "repository": "https://github.com/VarunGaikwad/doc_info_extract.git",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^7",
+        "@sap/cds-hana": "^2",
+        "axios": "^1.7.2",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "multer": "^1.4.5-lts.1"
+    },
+    "devDependencies": {
+        "@cap-js/sqlite": "^1",
+        "@sap/cds-dk": "^7",
+        "@sap/ux-specification": "^1.120.12",
+        "rimraf": "^5.0.7"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "watch-doc_info_extract_ui": "cds watch --open doc_info_extract_ui/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy doc_info_extract --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    },
+    "cds": {
+        "requires": {
+            "[production]": {
+                "db": "hana"
+            }
+        }
+    },
+    "sapux": [
+        "app/doc_info_extract_ui"
+    ]
 }

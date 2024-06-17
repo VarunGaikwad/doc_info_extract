@@ -1,0 +1,137 @@
+_schema-version: "3.1"
+ID: doc_info_extract
+description: Document Information Extraction.
+version: 1.0.0
+modules:
+- name: doc_info_extract-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: doc_info_extract-db
+  - name: uaa_doc_info_extract
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    readiness-health-check-http-endpoint: /health
+    readiness-health-check-type: http
+  build-parameters:
+    builder: npm
+- name: doc_info_extract-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: doc_info_extract-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: doc_info_extract-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: doc_info_extract-destination-service
+    parameters:
+      content-target: true
+  - name: doc_info_extract_html_repo_host
+    parameters:
+      service-key:
+        name: doc_info_extract_html_repo_host-key
+  - name: uaa_doc_info_extract
+    parameters:
+      service-key:
+        name: uaa_doc_info_extract-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: doc_info_extract_app_router_doc_info_extract_html_repo_host
+          ServiceInstanceName: doc_info_extract-html5-app-host-service
+          ServiceKeyName: doc_info_extract_html_repo_host-key
+          sap.cloud.service: doc_info_extract_app_router
+        - Authentication: OAuth2UserTokenExchange
+          Name: doc_info_extract_app_router_uaa_doc_info_extract
+          ServiceInstanceName: doc_info_extract-xsuaa-service
+          ServiceKeyName: uaa_doc_info_extract-key
+          sap.cloud.service: doc_info_extract_app_router
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: doc_info_extract-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: doc_info_extract_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - docinfoextractui.zip
+      name: docinfoextractui
+      target-path: resources/
+- name: docinfoextractui
+  type: html5
+  path: app/doc_info_extract_ui
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: doc_info_extract-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: doc_info_extract-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: doc_info_extract-srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: doc_info_extract-destination-service
+    service-plan: lite
+  requires:
+  - name: srv-api
+- name: doc_info_extract_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: doc_info_extract-html5-app-host-service
+    service-plan: app-host
+- name: uaa_doc_info_extract
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: doc_info_extract-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production

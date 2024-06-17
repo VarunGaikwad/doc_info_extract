@@ -1,0 +1,1 @@
+using DocumentExtraction as service from '../../srv/service';

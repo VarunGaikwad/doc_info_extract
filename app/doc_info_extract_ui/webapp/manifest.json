@@ -1,0 +1,133 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "docinfoextractui",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:fpm",
+      "version": "1.13.6",
+      "toolsId": "bd84979d-230c-4d1d-9dd2-59c4dc992328"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/document-extraction/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      },
+      "externalService": {
+        "uri": "/external/",
+        "type": "OData",
+        "settings": {
+          "annotations": []
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "Doc_Info_Extract-Display": {
+          "semanticObject": "Doc_Info_Extract",
+          "action": "Display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.124.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "docinfoextractui.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "name": "JobsMain",
+          "pattern": ":?query:",
+          "target": "JobsMain"
+        }
+      ],
+      "targets": {
+        "JobsMain": {
+          "type": "Component",
+          "id": "JobsMain",
+          "name": "sap.fe.core.fpm",
+          "options": {
+            "settings": {
+              "navigation": {},
+              "contextPath": "/Jobs",
+              "viewName": "docinfoextractui.ext.main.Main"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "doc_info_extract_app_router"
+  }
+}
