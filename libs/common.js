@@ -9,16 +9,15 @@ const axios = require("axios"),
     purchaseOrder: "fbab052e-6f9b-4a5f-b42f-29a8162eb1bf",
   };
 
-let token = undefined,
+let token = {
+    access_token: undefined,
+  },
   timeout = undefined;
 
 require("dotenv").config();
 
 const getDocumentExtractToken = async () => {
-    if (token && token.access_token) {
-      return token.access_token;
-    }
-
+    if (token.access_token) return token.access_token;
     const {
       data: { access_token, expires_in },
     } = await axios.post(
@@ -32,9 +31,7 @@ const getDocumentExtractToken = async () => {
         },
       }
     );
-    token = { access_token, expires_in };
-
-    defineTimeout(true, expires_in);
+    token = { access_token };
 
     return access_token;
   },
@@ -42,14 +39,17 @@ const getDocumentExtractToken = async () => {
     if (timeout) clearTimeout(timeout);
 
     timeout = setTimeout(() => {
-      token = undefined;
-    }, 43199);
+      token = {
+        access_token: undefined,
+      };
+    }, 43199000);
   },
-  postDocumentExtract = async (file, type) => {
+  postDocumentExtract = async (file, contentType, type = "invoice", name) => {
     const access_token = await getDocumentExtractToken(),
-      payload = new FormData();
+      payload = new FormData(),
+      blob = base64ToBlob(file, contentType);
 
-    payload.append("file", fs.createReadStream(file));
+    payload.append("file", blob, name);
 
     payload.append(
       "options",
@@ -65,11 +65,24 @@ const getDocumentExtractToken = async () => {
       `${DOCUMENT_EXTRACT_BASEURL}/document-information-extraction/v1/document/jobs`,
       payload,
       {
-        headers: { Authorization: `Bearer ${access_token}` },
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Content-Type": "multipart/form-data",
+        },
       }
     );
+    return data;
+  },
+  base64ToBlob = (base64String, contentType) => {
+    const byteCharacters = atob(base64String),
+      byteArrays = new Array(byteCharacters.length);
 
-    console.log(data);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteArrays[i] = byteCharacters.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteArrays);
+    return new Blob([byteArray], { type: contentType });
   };
 
 module.exports = { postDocumentExtract };

@@ -4,11 +4,17 @@
     xmlns="sap.m"
     controllerName="docinfoextractui.ext.main.Main"
 >
-    <Page
-        id="Main"
-        title="{i18n>MainTitle}"
-    >
+    <Page showHeader="false">
         <content>
+            <HBox class="sapUiSmallMarginTop" justifyContent="Center">
+                <RadioButtonGroup columns="4" selectedIndex="{localModel>/selectedIndex}">
+                    <RadioButton text="Business Card" />
+                    <RadioButton text="Invoice" />
+                    <RadioButton text="Payment Advice" />
+                    <RadioButton text="Purchase Order" />
+                </RadioButtonGroup>
+            </HBox>
+
             <upload:UploadSet
                 id="idUploadSet"
                 instantUpload="false"
@@ -26,6 +32,34 @@
                     </OverflowToolbar>
                 </upload:toolbar>
             </upload:UploadSet>
+            <Table items="{/Jobs}">
+                <columns>
+                    <Column>
+                        <Text text="ID" />
+                    </Column>
+                    <Column>
+                        <Text text="Processed Time" />
+                    </Column>
+                    <Column>
+                        <Text text="Status" />
+                    </Column>
+                    <Column width="5rem">
+                        <Text text="" />
+                    </Column>
+                </columns>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{id}" />
+                        <Text text="{processedTime}" />
+                        <ObjectStatus
+                            text="{status}"
+                            inverted="true"
+                            icon="{=${status} === 'DONE' ? 'sap-icon://accept' : 'sap-icon://alert'}"
+                            state="{=${status} === 'DONE' ? 'Success' : 'Warning'}" />
+                        <Button icon="sap-icon://refresh" type="Success" />
+                    </cells>
+                </ColumnListItem>
+            </Table>
         </content>
     </Page>
 </mvc:View>

@@ -28,9 +28,12 @@
       "authenticationType": "xsuaa"
     },
     {
-      "source": "^/external/(.*)$",
-      "destination": "Document_Information_Extraction",
-      "csrfProtection": false
+      "path": "/cmis",
+      "target": {
+        "type": "destination",
+        "name": "CPIDocService"
+      },
+      "description": "CPI Document Service"
     }
   ]
 }
