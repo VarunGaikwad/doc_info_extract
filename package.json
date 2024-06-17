@@ -1,8 +1,8 @@
 {
   "name": "doc_info_extract",
   "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
+  "description": "Document Information Extraction.",
+  "repository": "https://github.com/VarunGaikwad/doc_info_extract.git",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
