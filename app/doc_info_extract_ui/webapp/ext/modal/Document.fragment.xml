@@ -1,0 +1,57 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns:core="sap.ui.core" xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout">
+    <m:Dialog title="Document Info" contentWidth="100%" contentHeight="100%">
+        <m:content>
+            <m:IconTabBar>
+                <m:items>
+                    <m:IconTabFilter text="Header Field">
+                        <m:Table
+                            items="{localModel>/selectedDocumentInfo/extraction/headerFields}">
+                            <m:columns>
+                                <m:Column>
+                                    <m:Text text="Field Name" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Value" />
+                                </m:Column>
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem>
+                                    <m:cells>
+                                        <m:Text text="{localModel>name}" />
+                                        <m:Text text="{localModel>value}" />
+                                    </m:cells>
+                                </m:ColumnListItem>
+                            </m:items>
+                        </m:Table>
+                    </m:IconTabFilter>
+                    <m:IconTabFilter text="Line Item">
+
+                        <m:Table
+                            items="{localModel>/selectedDocumentInfo/extraction/lineItems}">
+                            <m:columns>
+                                <m:Column>
+                                    <m:Text text="Field Name" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Value" />
+                                </m:Column>
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem>
+                                    <m:cells>
+                                        <m:Text text="{localModel>name}" />
+                                        <m:Text text="{localModel>value}" />
+                                    </m:cells>
+                                </m:ColumnListItem>
+                            </m:items>
+                        </m:Table>
+                    </m:IconTabFilter>
+                </m:items>
+            </m:IconTabBar>
+        </m:content>
+        <m:endButton>
+            <m:Button text="Close" press="onDocumentExtractClose" type="Reject" />
+        </m:endButton>
+    </m:Dialog>
+</core:FragmentDefinition>

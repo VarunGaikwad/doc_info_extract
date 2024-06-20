@@ -1,65 +1,131 @@
 <mvc:View
-    xmlns:upload="sap.m.upload"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+    xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:u="sap.ui.unified"
     controllerName="docinfoextractui.ext.main.Main"
 >
-    <Page showHeader="false">
-        <content>
-            <HBox class="sapUiSmallMarginTop" justifyContent="Center">
-                <RadioButtonGroup columns="4" selectedIndex="{localModel>/selectedIndex}">
-                    <RadioButton text="Business Card" />
-                    <RadioButton text="Invoice" />
-                    <RadioButton text="Payment Advice" />
-                    <RadioButton text="Purchase Order" />
-                </RadioButtonGroup>
-            </HBox>
+    <tnt:ToolPage busy="{localModel>/busy}" id="toolPage">
+        <tnt:header>
+            <tnt:ToolHeader>
+                <Title
+                    text="{= ${localModel>/selectedKey} === 'idDocumentServicePage' ? 'Document Information Extraction' : 'Document Management Service'}" />
+            </tnt:ToolHeader>
+        </tnt:header>
+        <tnt:sideContent>
+            <tnt:SideNavigation itemSelect="onItemSelect" selectedKey="{localModel>/selectedKey}"
+                expanded="true">
+                <tnt:NavigationList>
+                    <tnt:NavigationListItem
+                        key="idDocumentServicePage"
+                        text="Document Extraction"
+                        icon="sap-icon://document-text"
+                        enabled="true"
+                        expanded="true"
+                    />
+                    <tnt:NavigationListItem
+                        key="idDocumentManagementPage"
+                        text="Document Management"
+                        icon="sap-icon://document-text"
+                        enabled="true"
+                        expanded="true"
+                    />
+                </tnt:NavigationList>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+        <tnt:mainContents>
+            <NavContainer id="idPageContainer" initialPage="idDocumentManagementPage">
+                <pages>
+                    <Page showHeader="false" id="idDocumentManagementPage">
+                        <Table items="{localModel>/GetDocumentService}">
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <ToolbarSpacer />
+                                    <Button press="onUploadButtonPress" type="Emphasized"
+                                        text="Upload File"
+                                        icon="sap-icon://upload-to-cloud"
+                                        iconFirst="false" />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column>
+                                    <Label text="Name" />
+                                </Column>
+                                <Column>
+                                    <Label text="Created Date" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Link press="onDocumentServiceNav" text="{localModel>name}" />
+                                        <Text
+                                            text="{path: 'localModel>creationDate', formatter: '.formatter.onFormatDateTime'}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </Page>
+                    <Page id="idDocumentServicePage" showHeader="false">
+                        <Table items="{localModel>/GetAllJobs}">
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <Button type="Attention" text="Refresh"
+                                        press="onFetchDocumentExtract"
+                                        icon="sap-icon://refresh" />
+                                    <ComboBox selectedKey="{localModel>/selectedSchema}"
+                                        items="{localModel>/schema}">
+                                        <core:Item key="{localModel>key}" text="{localModel>text}" />
+                                    </ComboBox>
 
-            <upload:UploadSet
-                id="idUploadSet"
-                instantUpload="false"
-                uploadButtonInvisible="true"
-                uploadCompleted="onUploadComplete"
-            >
-                <upload:toolbar>
-                    <OverflowToolbar>
-                        <ToolbarSpacer />
-                        <Button
-                            type="Attention"
-                            press="onUploadPress"
-                            text="Upload Files"
-                        />
-                    </OverflowToolbar>
-                </upload:toolbar>
-            </upload:UploadSet>
-            <Table items="{/Jobs}">
-                <columns>
-                    <Column>
-                        <Text text="ID" />
-                    </Column>
-                    <Column>
-                        <Text text="Processed Time" />
-                    </Column>
-                    <Column>
-                        <Text text="Status" />
-                    </Column>
-                    <Column width="5rem">
-                        <Text text="" />
-                    </Column>
-                </columns>
-                <ColumnListItem>
-                    <cells>
-                        <Text text="{id}" />
-                        <Text text="{processedTime}" />
-                        <ObjectStatus
-                            text="{status}"
-                            inverted="true"
-                            icon="{=${status} === 'DONE' ? 'sap-icon://accept' : 'sap-icon://alert'}"
-                            state="{=${status} === 'DONE' ? 'Success' : 'Warning'}" />
-                        <Button icon="sap-icon://refresh" type="Success" />
-                    </cells>
-                </ColumnListItem>
-            </Table>
-        </content>
-    </Page>
+                                    <MessageStrip
+                                        type="Warning"
+                                        showIcon="true"
+                                        visible="{= ${localModel>/messageStripText}.length > 0}"
+                                        showCloseButton="true"
+                                        text="{localModel>/messageStripText}" />
+
+                                    <ToolbarSpacer />
+                                    <u:FileUploader id="idFileUploader"
+                                        tooltip="Upload file"
+                                        uploadComplete="handleUploadComplete" />
+                                    <Button
+                                        text="Upload File"
+                                        press="onUploadButtonPress" />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column>
+                                    <Text text="ID" />
+                                </Column>
+                                <Column>
+                                    <Text text="Created" />
+                                </Column>
+                                <Column>
+                                    <Text text="Finished" />
+                                </Column>
+                                <Column>
+                                    <Text text="Status" />
+                                </Column>
+                            </columns>
+                            <ColumnListItem press="onDocumentExtractPress" type="Navigation">
+                                <cells>
+                                    <Text text="{localModel>id}" />
+                                    <Text
+                                        text="{path: 'localModel>created', formatter: '.formatter.onFormatDateTime'}" />
+                                    <Text
+                                        text="{path: 'localModel>finished', formatter: '.formatter.onFormatDateTime'}" />
+                                    <ObjectStatus
+                                        text="{localModel>status}"
+                                        inverted="true"
+                                        icon="{=${localModel>status} === 'DONE' ? 'sap-icon://accept' : 'sap-icon://alert'}"
+                                        state="{=${localModel>status} === 'DONE' ? 'Success' : 'Warning'}"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </Table>
+                    </Page>
+                </pages>
+            </NavContainer>
+        </tnt:mainContents>
+    </tnt:ToolPage>
 </mvc:View>
