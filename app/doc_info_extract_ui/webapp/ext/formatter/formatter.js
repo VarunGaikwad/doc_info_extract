@@ -11,5 +11,16 @@ sap.ui.define([], function () {
       }
       return value || "";
     },
+
+    onFormatSchema: function (value) {
+      if (!value) return "";
+      const schema = {
+        businessCard: "Business Card",
+        invoice: "Invoice",
+        paymentAdvice: "Payment Advice",
+        purchaseOrder: "Purchase Order",
+      };
+      return schema[value];
+    },
   };
 });

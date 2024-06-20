@@ -1,7 +1,23 @@
 <core:FragmentDefinition xmlns:m="sap.m" xmlns:core="sap.ui.core" xmlns="sap.uxap"
     xmlns:layout="sap.ui.layout">
-    <m:Dialog title="Document Info" contentWidth="100%" contentHeight="100%">
+    <m:Dialog title="Document Info ({localModel>/selectedDocumentInfo/fileName})" showHeader="true"
+        contentWidth="100%" contentHeight="100%">
         <m:content>
+            <m:HBox justifyContent="SpaceBetween" alignItems="Center"
+                class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop">
+                <m:ObjectIdentifier title="Language"
+                    text="{localModel>/selectedDocumentInfo/languageCodes}" titleActive="false" />
+                <m:ObjectIdentifier title="Page Count"
+                    text="{localModel>/selectedDocumentInfo/pageCount}" titleActive="false" />
+                <m:ObjectIdentifier title="Document Type"
+                    text="{localModel>/selectedDocumentInfo/documentType}" titleActive="false" />
+                <m:ObjectIdentifier title="Created On"
+                    text="{path: 'localModel>/selectedDocumentInfo/created', formatter: '.formatter.onFormatDateTime'}"
+                    titleActive="false" />
+                <m:ObjectIdentifier title="Finished On"
+                    text="{path: 'localModel>/selectedDocumentInfo/finished', formatter: '.formatter.onFormatDateTime'}"
+                    titleActive="false" />
+            </m:HBox>
             <m:IconTabBar>
                 <m:items>
                     <m:IconTabFilter text="Header Field">

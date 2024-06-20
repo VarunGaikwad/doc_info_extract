@@ -66,25 +66,18 @@
                         </Table>
                     </Page>
                     <Page id="idDocumentServicePage" showHeader="false">
-                        <Table items="{localModel>/GetAllJobs}">
+                        <Table backgroundDesign="Translucent"
+                            items="{path: 'localModel>/GetAllJobs', sorter: {path: 'localModel>finished', descending: true}}">
                             <headerToolbar>
                                 <OverflowToolbar>
                                     <Button type="Attention" text="Refresh"
                                         press="onFetchDocumentExtract"
                                         icon="sap-icon://refresh" />
+                                    <ToolbarSpacer />
                                     <ComboBox selectedKey="{localModel>/selectedSchema}"
                                         items="{localModel>/schema}">
                                         <core:Item key="{localModel>key}" text="{localModel>text}" />
                                     </ComboBox>
-
-                                    <MessageStrip
-                                        type="Warning"
-                                        showIcon="true"
-                                        visible="{= ${localModel>/messageStripText}.length > 0}"
-                                        showCloseButton="true"
-                                        text="{localModel>/messageStripText}" />
-
-                                    <ToolbarSpacer />
                                     <u:FileUploader id="idFileUploader"
                                         tooltip="Upload file"
                                         uploadComplete="handleUploadComplete" />
@@ -94,8 +87,12 @@
                                 </OverflowToolbar>
                             </headerToolbar>
                             <columns>
+
                                 <Column>
-                                    <Text text="ID" />
+                                    <Text text="File Name" />
+                                </Column>
+                                <Column>
+                                    <Text text="Document Type" />
                                 </Column>
                                 <Column>
                                     <Text text="Created" />
@@ -103,13 +100,15 @@
                                 <Column>
                                     <Text text="Finished" />
                                 </Column>
-                                <Column>
+                                <Column hAlign="Center" vAlign="Middle" width="7rem">
                                     <Text text="Status" />
                                 </Column>
                             </columns>
                             <ColumnListItem press="onDocumentExtractPress" type="Navigation">
                                 <cells>
-                                    <Text text="{localModel>id}" />
+                                    <Text text="{localModel>fileName}" />
+                                    <Text
+                                        text="{path: 'localModel>documentType', formatter: '.formatter.onFormatSchema'}" />
                                     <Text
                                         text="{path: 'localModel>created', formatter: '.formatter.onFormatDateTime'}" />
                                     <Text
